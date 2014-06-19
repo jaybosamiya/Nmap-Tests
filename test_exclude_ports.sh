@@ -6,6 +6,8 @@ usage(){
   echo "Suggested Usage:" 1>&2
   echo "  sudo $0 \"multiple space separated hosts\" n \"path to nmap directory\" >/dev/null" 1>&2
   echo "  This will let you see more information only for tests that fail" 1>&2
+  echo " Personally, I'd use" 1>&2
+  echo "  (sudo $0 \"multiple space separated hosts\" n \"path to nmap directory\" >/dev/null) 2>&1 | less"
   exit 1
 }
 
