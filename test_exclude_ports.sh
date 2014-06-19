@@ -311,3 +311,39 @@ sudo $nmap --privileged $1 -p 23 -oX .a.xml 2>&1
 sudo $nmap --privileged $1 --top-ports 1 --exclude-ports 80 -oX .b.xml 2>&1
 testUsingNdiff
 rm .a.xml .b.xml
+echo 1>&2
+echo 1>&2
+
+
+echo 1>&2
+echo 1>&2
+echo Testing host discovery exclusion with top-ports 1>&2
+echo =============================================== 1>&2
+echo 1>&2
+echo 1>&2
+echo Unprivileged 1>&2
+echo ============ 1>&2
+echo 1>&2
+echo "Testing exclusion of all SYN_PING and ACK_PING defaults" 1>&2
+echo "-------------------------------------------------------" 1>&2
+TEMPVAR="`$nmap $1 --unprivileged --top-ports 10 --exclude-ports 80,443 2>&1 | grep "WARNING: a TCP ping"`"
+if [ -n "$TEMPVAR" ]; then
+  echo Passed 1>&2
+  echo "Relevant line: $TEMPVAR"
+else
+  echo Failed 1>&2
+  echo "  Warning was not shown"
+fi
+echo 1>&2
+echo 1>&2
+echo Privileged 1>&2
+echo ========== 1>&2
+echo 1>&2
+echo "Testing exclusion of all SYN_PING and ACK_PING defaults" 1>&2
+echo "----------------------------------" 1>&2
+sudo $nmap --privileged $1 --top-ports 2 -p 21-23 -oX .a.xml 2>&1
+sudo $nmap --privileged $1 --top-ports 2 --exclude-ports 80,443 -oX .b.xml 2>&1
+testUsingNdiff
+rm .a.xml .b.xml
+echo 1>&2
+echo 1>&2
