@@ -342,7 +342,7 @@ echo Privileged 1>&2
 echo ========== 1>&2
 echo 1>&2
 echo "Testing exclusion of all SYN_PING and ACK_PING defaults" 1>&2
-echo "----------------------------------" 1>&2
+echo "-------------------------------------------------------" 1>&2
 sudo $nmap --privileged $1 --top-ports 2 -p 21-23 -oX .a.xml 2>&1
 sudo $nmap --privileged $1 --top-ports 2 --exclude-ports 80,443 -oX .b.xml 2>&1
 testUsingNdiff
