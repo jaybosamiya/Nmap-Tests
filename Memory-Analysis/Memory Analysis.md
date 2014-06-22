@@ -12,6 +12,7 @@ function peak_memory_usage {
 
 Note: The `softlimit -a` based limits are **extremely** restrictive and barely allow enough functionality. In a more real world scenario, the limit will most definitely be much larger (and scans will cause problem only if they are much larger than the ones used in this analysis). Small scans with restrictive limits have been used only to conduct a fast study. For a more real-world-similar study, a much longer time period would be required.
 
+Note: Opening scans larger than Zenmap can handle is a **very uncommon** scenario since Zenmap needs to create these XMLs first (and how could it make them if it cannot read them, eh?). Hence, the opening of b.xml and c.xml under `softlimit -a` should be taken with a pinch of salt.
 
 Running Scans
 -------------
