@@ -19,3 +19,5 @@ As for this, I think that a minor change might be necessary in the code that sav
 Regarding the relation of size of output to memory usage:
 There seems to be a (roughly) linear relationship between memory used and size of the `<output>` in the XML. 
 ![equation](http://i57.tinypic.com/j5ckdc.png "(MemoryUsage(X.xml)-MemoryUsage(X_stripped.xml))/(SizeOf(X.xml)-SizeOf(X_stripped.xml))") is approximately 8 for X = a,b,c. This is true whenever there is no error message shown on screen (i.e. in a non-restrictive environment).
+
+However, the memory usage while running the scans seems to be a bigger problem that should be handled. The memory usage is approximately 16 times the output generated.
