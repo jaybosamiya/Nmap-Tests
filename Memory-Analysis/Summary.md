@@ -15,3 +15,7 @@ This is a summarizing analysis of the statistics [here](https://github.com/jaybo
 Concerning the saving of scans in a restrictive environment, trying to save a scan which is already showing the error message causes a crash with "GLib (gthread-posix.c): Unexpected error from C library during 'malloc': Cannot allocate memory.  Aborting."
 However, this occurs **only** for scans which already have the error message shown that says "some features might not work as expected". All remaining scans work and save as expected.
 As for this, I think that a minor change might be necessary in the code that saves scans. I will work on this.
+
+Regarding the relation of size of output to memory usage:
+There seems to be a (roughly) linear relationship between memory used and size of the `<output>` in the XML. 
+![equation](http://www.sciweavers.org/tex2img.php?eq=%20%5Cfrac%7BMemoryUsed%28X.xml%29-MemoryUsed%28X%5C_stripped.xml%29%7D%7BSizeOf%28X.xml%29-SizeOf%28X%5C_stripped.xml%29%7D%20&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0) is approximately 8 for X = a,b,c. This is true whenever there is no error message shown on screen (i.e. in a non-restrictive environment).
