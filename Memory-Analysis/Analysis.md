@@ -1,5 +1,5 @@
-Zenmap Memory Analysis Summary
-==============================
+Zenmap Memory Analysis
+======================
 
 This is a summarizing analysis of the statistics [here](https://github.com/jaybosamiya/Nmap-Tests/blob/master/Memory-Analysis/Memory%20Analysis.md).
 
