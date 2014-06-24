@@ -4,7 +4,7 @@ Zenmap Memory Analysis
 Patch is on the [dev list](http://seclists.org/nmap-dev/2014/q2/429)
 
 Code used to test for peak memory usage is
-```
+```bash
 function peak_memory_usage {
   /usr/bin/time -v "$@" 2>&1 | awk '/Maximum resident set size \(kbytes\): /{print $6 " kbytes"}' | tee /dev/tty | xclip -selection clipboard
 }
