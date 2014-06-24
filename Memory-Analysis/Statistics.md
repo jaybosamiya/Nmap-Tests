@@ -1,5 +1,5 @@
-Zenmap Memory Analysis
-======================
+Zenmap Memory Statistics
+========================
 
 Patch is on the [dev list](http://seclists.org/nmap-dev/2014/q2/429)
 
