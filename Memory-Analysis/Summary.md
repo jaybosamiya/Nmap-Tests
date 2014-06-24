@@ -1,7 +1,7 @@
 Zenmap Memory Analysis Summary
 ==============================
 
-The complete analysis and statistics are [here](https://github.com/jaybosamiya/Nmap-Tests/blob/master/Memory-Analysis/Memory%20Analysis.md).
+This is a summarizing analysis of the statistics [here](https://github.com/jaybosamiya/Nmap-Tests/blob/master/Memory-Analysis/Memory%20Analysis.md).
 
 + For running small scans, the patch does not significantly alter memory usage.
 + For running larger scans (which should trigger MemoryError otherwise), the patch limits the memory usage and Zenmap continues to run instead of crashing.
