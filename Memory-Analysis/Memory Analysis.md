@@ -14,60 +14,31 @@ Note: The `softlimit -a` based limits are **extremely** restrictive and barely a
 
 Note: Opening scans larger than Zenmap can handle is a **very uncommon** scenario since Zenmap needs to create these XMLs first (and how could it make them if it cannot read them, eh?). Hence, the opening of b.xml and c.xml under `softlimit -a` should be taken with a pinch of salt.
 
+Note: All numbers below are in _kbytes_.
+
 Running Scans
 -------------
 
+Raw statistics:
 
-Raw Statistics:
+| Test        | Direct code from SVN | Patched code (directly run) | Patched code (run using `softlimit -a 800000000`) | Patched code (run using `softlimit -a 1000000000`) |
+|:------------|---------------------:|----------------------------:|--------------------------------------------------:|---------------------------------------------------:|
+| Opening     | 39492                | 39584                       | 41628                                             | 39496                                              |
+| Running [1] | 47012                | 47044                       | 46996                                             | 47012                                              |
+| Running [2] | 406296               | 417932                      | 128900                                            | 270988                                             |
+| Running [3] | 1470888              | 1474404                     | 125696                                            | 273240                                             |
 
-+ When using direct code from SVN
-	+ Upon opening     - 	39492 kbytes
-	+ Upon running [1] -	47012 kbytes
-	+ Upon running [2] - 	406296 kbytes
-	+ Upon running [3] -	1470888 kbytes
-+ When using the patched code (running zenmap directly)
-	+ Upon opening     - 	39584 kbytes
-	+ Upon running [1] -	47044 kbytes
-	+ Upon running [2] - 	417932 kbytes
-	+ Upon running [3] -	1474404 kbytes
-+ When using the patched code (running zenmap using `softlimit -a 800000000`)
-	+ Upon opening     - 	41628 kbytes
-	+ Upon running [1] -	46996 kbytes
-	+ Upon running [2] - 	128900 kbytes
-	+ Upon running [3] -	125696 kbytes
-+ When using the patched code (running zenmap using `softlimit -a 1000000000`)
-	+ Upon opening     - 	39496 kbytes
-	+ Upon running [1] -	47012 kbytes
-	+ Upon running [2] - 	270988 kbytes
-	+ Upon running [3] -	273240 kbytes
+Normalizing by taking "just opened as 0 _kbytes_:
+
+| Test        | Direct code from SVN | Patched code (directly run) | Patched code (run using `softlimit -a 800000000`) | Patched code (run using `softlimit -a 1000000000`) |
+|:------------|---------------------:|----------------------------:|--------------------------------------------------:|---------------------------------------------------:|
+| Opening     | 0                    | 0                           | 0                                                 | 0                                                  |
+| Running [1] | 7520                 | 7460                        | 5368                                              | 7516                                               |
+| Running [2] | 366804               | 378348                      | 87272                                             | 231492                                             |
+| Running [3] | 1431396              | 1434820                     | 84068                                             | 233744                                             |
 
 
-Normalizing by taking "just opened" as 0 kbytes:
-
-+ When using direct code from SVN
-	+ Upon opening     - 	0 kbytes
-	+ Upon running [1] -	7520 kbytes
-	+ Upon running [2] - 	366804 kbytes
-	+ Upon running [3] -	1431396 kbytes
-+ When using the patched code (running zenmap directly)
-	+ Upon opening     - 	0 kbytes
-	+ Upon running [1] -	7460 kbytes
-	+ Upon running [2] - 	378348 kbytes
-	+ Upon running [3] -	1434820 kbytes
-+ When using the patched code (running zenmap using `softlimit -a 800000000`)
-	+ Upon opening     - 	0 kbytes
-	+ Upon running [1] -	5368 kbytes
-	+ Upon running [2] - 	87272 kbytes
-	+ Upon running [3] -	84068 kbytes
-+ When using the patched code (running zenmap using `softlimit -a 1000000000`)
-	+ Upon opening     - 	0 kbytes
-	+ Upon running [1] -	7516 kbytes
-	+ Upon running [2] - 	231492 kbytes
-	+ Upon running [3] -	233744 kbytes
-
-
-Scans List
-----------
+Scans list:
 
 + [1] `nmap -r --top-ports 1000 127.0.0.1/24`
 + [2] `nmap --packet-trace -r --top-ports 1000 127.0.0.1/24`
@@ -75,90 +46,36 @@ Scans List
 
 
 
+
 Opening Scans
 -------------
 
-Script
-```
-function give_stats {
-  echo -n "    + Upon opening - "; peak_memory_usage $@ && for i in *.xml; do echo -n "    + $i - "; peak_memory_usage $@ -f "$i"; done
-}
-```
-
 Raw Statistics:
 
-+ When using direct code from SVN
-    + Upon opening   - 41564 kbytes
-    + a_stripped.xml - 44556 kbytes
-    + a.xml          - 44964 kbytes
-    + b_stripped.xml - 44392 kbytes
-    + b.xml          - 230672 kbytes
-    + c_stripped.xml - 47584 kbytes
-    + c.xml          - 727700 kbytes
-+ When using the patched code (running zenmap directly)
-    + Upon opening   - 39228 kbytes
-    + a_stripped.xml - 44504 kbytes
-    + a.xml          - 45020 kbytes
-    + b_stripped.xml - 44392 kbytes
-    + b.xml          - 230788 kbytes
-    + c_stripped.xml - 45420 kbytes
-    + c.xml          - 727968 kbytes
-+ When using the patched code (running zenmap using `softlimit -a 800000000`)
-    + Upon opening   - 39552 kbytes
-    + a_stripped.xml - 44492 kbytes
-    + a.xml          - 44936 kbytes
-    + b_stripped.xml - 44396 kbytes
-    + b.xml          - 127148 kbytes
-    + c_stripped.xml - 45420 kbytes
-    + c.xml          - 72872 kbytes
-+ When using the patched code (running zenmap using `softlimit -a 1000000000`)
-    + Upon opening   - 39588 kbytes
-    + a_stripped.xml - 46544 kbytes
-    + a.xml          - 44972 kbytes
-    + b_stripped.xml - 44504 kbytes
-    + b.xml          - 230988 kbytes
-    + c_stripped.xml - 45524 kbytes
-    + c.xml          - 282656 kbytes
-
+| Test           | Direct code from SVN | Patched code (directly run) | Patched code (run using `softlimit -a 800000000`) | Patched code (run using `softlimit -a 1000000000`) |
+|:---------------|---------------------:|----------------------------:|--------------------------------------------------:|---------------------------------------------------:|
+| Opening        | 41564                | 39228                       | 39552                                             | 39588                                              |
+| a_stripped.xml | 44556                | 44504                       | 44492                                             | 46544                                              |
+| a.xml          | 44964                | 45020                       | 44936                                             | 44972                                              |
+| b_stripped.xml | 44392                | 44392                       | 44396                                             | 44504                                              |
+| b.xml          | 230672               | 230788                      | 127148                                            | 230988                                             |
+| c_stripped.xml | 47584                | 45420                       | 45420                                             | 45524                                              |
+| c.xml          | 727700               | 727968                      | 72872                                             | 282656                                             |
 
 Normalizing by taking "just opened" as 0 kbytes:
 
-+ When using direct code from SVN
-    + Upon opening   - 0 kbytes
-    + a_stripped.xml - 2992 kbytes
-    + a.xml          - 3400 kbytes
-    + b_stripped.xml - 2828 kbytes
-    + b.xml          - 189108 kbytes
-    + c_stripped.xml - 6020 kbytes
-    + c.xml          - 686136 kbytes
-+ When using the patched code (running zenmap directly)
-    + Upon opening   - 0 kbytes
-    + a_stripped.xml - 5276 kbytes
-    + a.xml          - 5792 kbytes
-    + b_stripped.xml - 5164 kbytes
-    + b.xml          - 191560 kbytes
-    + c_stripped.xml - 6192 kbytes
-    + c.xml          - 688740 kbytes
-+ When using the patched code (running zenmap using `softlimit -a 800000000`)
-    + Upon opening   - 0 kbytes
-    + a_stripped.xml - 4940 kbytes
-    + a.xml          - 5384 kbytes
-    + b_stripped.xml - 4844 kbytes
-    + b.xml          - 87596 kbytes
-    + c_stripped.xml - 5868 kbytes
-    + c.xml          - 33320 kbytes
-+ When using the patched code (running zenmap using `softlimit -a 1000000000`)
-    + Upon opening   - 0 kbytes
-    + a_stripped.xml - 6956 kbytes
-    + a.xml          - 5384 kbytes
-    + b_stripped.xml - 4916 kbytes
-    + b.xml          - 191400 kbytes
-    + c_stripped.xml - 5936 kbytes
-    + c.xml          - 243068 kbytes
+| Test           | Direct code from SVN | Patched code (directly run) | Patched code (run using `softlimit -a 800000000`) | Patched code (run using `softlimit -a 1000000000`) |
+|:---------------|---------------------:|----------------------------:|--------------------------------------------------:|---------------------------------------------------:|
+| Opening        | 0                    | 0                           | 0                                                 | 0                                                  |
+| a_stripped.xml | 2992                 | 5276                        | 4940                                              | 6956                                               |
+| a.xml          | 3400                 | 5792                        | 5384                                              | 5384                                               |
+| b_stripped.xml | 2828                 | 5164                        | 4844                                              | 4916                                               |
+| b.xml          | 189108               | 191560                      | 87596                                             | 191400                                             |
+| c_stripped.xml | 6020                 | 6192                        | 5868                                              | 5936                                               |
+| c.xml          | 686136               | 688740                      | 33320                                             | 243068                                             |
 
 
-Description of XML files
-------------------------
+Description of XML files:
 
 + a.xml - XML file generated using [1] - 236.1 kB
 + a_stripped.xml - XML file generating by removing `<output>` tag from a.xml - 193.2 kB
@@ -166,3 +83,4 @@ Description of XML files
 + b_stripped.xml - XML file generating by removing `<output>` tag from b.xml - 193.2 kB
 + c.xml - XML file generated using [3] - 85.8 MB
 + c_stripped.xml - XML file generating by removing `<output>` tag from c.xml - 246.1 kB
++ 
