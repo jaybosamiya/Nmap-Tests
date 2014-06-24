@@ -18,4 +18,4 @@ As for this, I think that a minor change might be necessary in the code that sav
 
 Regarding the relation of size of output to memory usage:
 There seems to be a (roughly) linear relationship between memory used and size of the `<output>` in the XML. 
-![equation](http://www.sciweavers.org/tex2img.php?eq=%20%5Cfrac%7BMemoryUsed%28X.xml%29-MemoryUsed%28X%5C_stripped.xml%29%7D%7BSizeOf%28X.xml%29-SizeOf%28X%5C_stripped.xml%29%7D%20&bc=White&fc=Black&im=jpg&fs=12&ff=arev&edit=0) is approximately 8 for X = a,b,c. This is true whenever there is no error message shown on screen (i.e. in a non-restrictive environment).
+![equation](http://i57.tinypic.com/j5ckdc.png) is approximately 8 for X = a,b,c. This is true whenever there is no error message shown on screen (i.e. in a non-restrictive environment).
