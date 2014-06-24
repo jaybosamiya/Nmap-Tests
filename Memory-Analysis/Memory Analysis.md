@@ -83,4 +83,3 @@ Description of XML files:
 + b_stripped.xml - XML file generating by removing `<output>` tag from b.xml - 193.2 kB
 + c.xml - XML file generated using [3] - 85.8 MB
 + c_stripped.xml - XML file generating by removing `<output>` tag from c.xml - 246.1 kB
-+ 
