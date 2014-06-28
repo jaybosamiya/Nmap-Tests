@@ -22,3 +22,15 @@ There seems to be a **(roughly) linear relationship** between memory used and si
 ![equation](http://i57.tinypic.com/j5ckdc.png "(MemoryUsage(X.xml)-MemoryUsage(X_stripped.xml))/(SizeOf(X.xml)-SizeOf(X_stripped.xml))") is approximately 8 for X = a,b,c. This is true whenever there is no error message shown on screen (i.e. in a non-restrictive environment).
 
 However, the memory usage while running the scans seems to be a bigger problem that should be handled. The memory usage is approximately 16 times the output generated.
+
+To test whether showing the error really reduces memory usage, the following code is used
+```python
+from guppy import hpy
+hp = hpy()
+
+def mem_usage():
+    h = hp.heap()
+    return h.indisize
+```
+and then the line `            print ">>> "+str(mem_usage()) + " bytes"` is added to the end of `show_large_output_message` and the line `        print "--- "+str(mem_usage()) + " bytes"` is added to the end of `refrest_output`.
+Running the scan now and canceling it (after it has shown error message shows that the memory usage reduces by quite a bit.
