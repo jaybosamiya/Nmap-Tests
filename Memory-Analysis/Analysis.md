@@ -33,4 +33,4 @@ def mem_usage():
     return h.indisize
 ```
 and then the line `            print ">>> "+str(mem_usage()) + " bytes"` is added to the end of `show_large_output_message` and the line `        print "--- "+str(mem_usage()) + " bytes"` is added to the end of `refrest_output`.
-Running the scan now and canceling it (after it has shown error message shows that the memory usage reduces by quite a bit.
+Running the scan now and canceling it (after it has shown error message) shows that the memory usage reduces by quite a bit.
